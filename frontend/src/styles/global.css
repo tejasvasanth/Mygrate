@@ -1,0 +1,183 @@
+/* ── Tailwind ─────────────────────────────────────────────── */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base ─────────────────────────────────────────────────── */
+
+:root {
+  --brand-green-50: #f0fdf4;
+  --brand-green-100: #dcfce7;
+  --brand-green-500: #22c55e;
+  --brand-green-600: #16a34a;
+  --brand-green-700: #15803d;
+  --brand-ink: #0f1b14;
+  --brand-ink-soft: #4b5a52;
+  --brand-ink-muted: #7c8a83;
+  --brand-surface: #ffffff;
+  --brand-surface-soft: #f7faf8;
+  --brand-border: #e4ede7;
+  --font-sans: 'Satoshi', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: transparent;
+  color: var(--brand-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbar — thin and unobtrusive ─────────────────────── */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #d6e3da;
+  border-radius: 99px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b9cfc1;
+  background-clip: content-box;
+}
+
+/* ── Reusable surface treatments ──────────────────────────── */
+.surface-card {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--brand-border);
+  border-radius: 14px;
+}
+
+/* Glass panel used by Ant Design cards over the grid backdrop. */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.92) !important;
+}
+
+/* Cards lift a touch on hover. 160ms is fast enough to feel
+   responsive but slow enough to avoid a twitchy feel. */
+.hover-lift {
+  transition: border-color 160ms ease;
+}
+.hover-lift:hover {
+  border-color: #cfe3d6;
+}
+
+/* Soft green wash used behind hero + empty states. */
+.mesh-bg {
+  background:
+    radial-gradient(60rem 32rem at 12% -10%, #e9fbf0 0%, transparent 55%),
+    radial-gradient(48rem 28rem at 92% 4%, #f2fdf6 0%, transparent 58%),
+    var(--brand-surface);
+}
+
+.grid-lines {
+  background-image:
+    linear-gradient(var(--brand-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--brand-border) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(58rem 30rem at 50% 0%, #000 0%, transparent 72%);
+  mask-image: radial-gradient(58rem 30rem at 50% 0%, #000 0%, transparent 72%);
+  opacity: 0.5;
+}
+
+/* ── Animations ───────────────────────────────────────────── */
+
+/* Slow drift on the hero gradient — 18s so it's felt, not watched. */
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0) scale(1.02);
+  }
+}
+.drift {
+  animation: drift 18s ease-in-out infinite;
+}
+
+/* Breathing dot for "job is running" indicators. */
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgba(34, 197, 94, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+}
+.pulse-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 99px;
+  background: var(--brand-green-500);
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Sweep used on active progress bars. */
+@keyframes sheen {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+.sheen {
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: sheen 2.4s linear infinite;
+}
+
+/* ── Terminal ─────────────────────────────────────────────── */
+.terminal-shell {
+  background: #0c1410;
+  border-radius: 12px;
+  padding: 14px 12px 8px;
+  border: 1px solid #1c2b22;
+}
+.terminal-shell .xterm {
+  padding: 0;
+}
+
+/* ── Accessibility ────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .hover-lift:hover {
+    transform: none;
+  }
+}

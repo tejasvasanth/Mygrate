@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+*.egg-info/
+.pytest_cache/
+.coverage
+
+# Node
+node_modules/
+dist/
+frontend/dist/
+
+# Env — never commit secrets
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+backend/.env
+frontend/.env
+
+# Local tool state that may include tokens or machine-specific config
+.claude/settings.local.json
+
+# Common secret material
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.jks
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Local test artifacts
+*.sqlite
+*.db
